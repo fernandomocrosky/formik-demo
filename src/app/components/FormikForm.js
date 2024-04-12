@@ -1,11 +1,14 @@
 'use client';
 
 import { ErrorMessage, Field, Form, Formik, useFormik } from 'formik';
+import TextError from './TextError';
 
 const initialValues = {
   name: '',
   email: '',
   channel: '',
+  comments: '',
+  addres: '',
 };
 
 const onSubmit = (values) => {
@@ -34,7 +37,10 @@ function FormikForm() {
           placeholder="name"
           name="name"
         />
-        <ErrorMessage name="name"></ErrorMessage>
+        <ErrorMessage
+          name="name"
+          component={TextError}
+        />
         <br></br>
 
         <Field
@@ -42,7 +48,7 @@ function FormikForm() {
           placeholder="email"
           name="email"
         />
-        <ErrorMessage name="email"></ErrorMessage>
+        <ErrorMessage name="email">{(errorMessage) => <div style={{ color: 'red' }}>{errorMessage}</div>}</ErrorMessage>
         <br></br>
 
         <Field
@@ -50,7 +56,24 @@ function FormikForm() {
           placeholder="channel"
           name="channel"
         />
-        <ErrorMessage name="channel"></ErrorMessage>
+        <ErrorMessage name="channel" />
+        <br></br>
+
+        <Field
+          name="comments"
+          as="textarea"></Field>
+        <br></br>
+
+        <Field name="address">
+          {({ field, form, meta }) => {
+            <input
+              type="text"
+              {...field}></input>;
+            {
+              meta.touched && meta.error ? <div>{meta.error}</div> : null;
+            }
+          }}
+        </Field>
         <br></br>
 
         <button type="submit">Submit</button>
