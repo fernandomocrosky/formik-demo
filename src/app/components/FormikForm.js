@@ -1,6 +1,6 @@
 'use client';
 
-import { ErrorMessage, Field, FieldArray, Form, Formik, useFormik } from 'formik';
+import { ErrorMessage, FastField, Field, FieldArray, Form, Formik, useFormik } from 'formik';
 import TextError from './TextError';
 
 const initialValues = {
@@ -66,7 +66,9 @@ function FormikForm() {
           as="textarea"></Field>
         <br></br>
 
-        <Field name="address">
+        <FastField
+          name="address"
+          placeholder="address">
           {({ field, form, meta }) => {
             <input
               type="text"
@@ -75,7 +77,7 @@ function FormikForm() {
               meta.touched && meta.error ? <div>{meta.error}</div> : null;
             }
           }}
-        </Field>
+        </FastField>
         <br></br>
 
         <div>
