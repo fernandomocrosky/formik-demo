@@ -9,6 +9,11 @@ const initialValues = {
   channel: '',
   comments: '',
   addres: '',
+  social: {
+    facebook: '',
+    twitter: '',
+  },
+  phoneNumbers: ['', ''],
 };
 
 const onSubmit = (values) => {
@@ -75,6 +80,11 @@ function FormikForm() {
           }}
         </Field>
         <br></br>
+
+        <Field name="social.facebook" />
+        <Field name="social.twitter" />
+        <Field name="phoneNumbers[0]" />
+        <Field name="phoneNumbers[1]" />
 
         <button type="submit">Submit</button>
       </Form>
