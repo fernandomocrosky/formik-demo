@@ -1,6 +1,6 @@
 'use client';
 
-import { ErrorMessage, Field, Form, Formik, useFormik } from 'formik';
+import { ErrorMessage, Field, FieldArray, Form, Formik, useFormik } from 'formik';
 import TextError from './TextError';
 
 const initialValues = {
@@ -9,11 +9,8 @@ const initialValues = {
   channel: '',
   comments: '',
   addres: '',
-  social: {
-    facebook: '',
-    twitter: '',
-  },
-  phoneNumbers: ['', ''],
+  phoneNumber: ['', ''],
+  phNumbers: [''],
 };
 
 const onSubmit = (values) => {
@@ -81,10 +78,37 @@ function FormikForm() {
         </Field>
         <br></br>
 
-        <Field name="social.facebook" />
-        <Field name="social.twitter" />
-        <Field name="phoneNumbers[0]" />
-        <Field name="phoneNumbers[1]" />
+        <div>
+          <label>List of phone numbers</label>
+          <FieldArray name="phNumbers">
+            {(fieldArrayProps) => {
+              const { push, remove, form } = fieldArrayProps;
+              const { values } = form;
+              const { phNumbers } = values;
+              return (
+                <div>
+                  {phNumbers.map((number, index) => (
+                    <div key={index}>
+                      <Field name={`phNumbers[${index}]`} />
+                      {index > 0 && (
+                        <button
+                          type="button"
+                          onClick={() => remove(index)}>
+                          -
+                        </button>
+                      )}
+                      <button
+                        type="button"
+                        onClick={() => push('')}>
+                        +
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              );
+            }}
+          </FieldArray>
+        </div>
 
         <button type="submit">Submit</button>
       </Form>
