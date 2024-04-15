@@ -1,8 +1,7 @@
 import Image from 'next/image';
-import FormikForm from './components/FormikForm';
+import FormikForm from './formik-basics/components/FormikForm';
+import FormikContainer from './components/FormikContainer';
 
 export default function Home() {
-  return <div>
-      <FormikForm />
-  </div>;
+  return <FormikContainer />;
 }
